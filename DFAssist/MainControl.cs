@@ -18,6 +18,8 @@ using DFAssist.DataModel;
 using DFAssist.Shell;
 using Microsoft.Win32;
 using Timer = System.Windows.Forms.Timer;
+using Telegram.Bot;
+using PushbulletSharp;
 
 namespace DFAssist
 {
@@ -60,6 +62,18 @@ namespace DFAssist
         private CheckBox _ttsCheckBox;
         private GroupBox _ttsSettings;
         private SettingsSerializer _xmlSettingsSerializer;
+        private GroupBox _telegramSettings;
+        private TextBox _chatIdTextBox;
+        private Label _ChatIdLabel;
+        private TextBox _telegramTokenTextBox;
+        private Label _tokenLabel;
+        private CheckBox _telegramCheckBox;
+        private GroupBox _pushbulletSettings;
+        private TextBox _pushbulletDeviceIdTextBox;
+        private Label _pushbulletDeviceIdlabel;
+        private TextBox _pushbulletTokenTextBox;
+        private Label _pushbulletTokenLabel;
+        private CheckBox _pushbulletCheckbox;
         private Panel _settingsPanel;
 
         #region Load Methods
@@ -114,305 +128,470 @@ namespace DFAssist
 
         private void InitializeComponent()
         {
-            _label1 = new Label();
-            _languageValue = new TextBox();
-            _languageComboBox = new ComboBox();
-            _enableTestEnvironment = new CheckBox();
-            _ttsCheckBox = new CheckBox();
-            _persistToasts = new CheckBox();
-            _enableLegacyToast = new CheckBox();
-            _disableToasts = new CheckBox();
-            _appTabControl = new TabControl();
-            _mainTabPage = new TabPage();
-            _mainTableLayout = new TableLayoutPanel();
-            _button1 = new Button();
-            _richTextBox1 = new RichTextBox();
-            _appTitle = new Label();
-            _copyrightLink = new LinkLabel();
-            _settingsPage = new TabPage();
-            _settingsPanel = new Panel();
-            _settingsTableLayout = new TableLayoutPanel();
-            _ttsSettings = new GroupBox();
-            _toastSettings = new GroupBox();
-            _generalSettings = new GroupBox();
-            _testSettings = new GroupBox();
-            _appTabControl.SuspendLayout();
-            _mainTabPage.SuspendLayout();
-            _mainTableLayout.SuspendLayout();
-            _settingsPage.SuspendLayout();
-            _settingsPanel.SuspendLayout();
-            _settingsTableLayout.SuspendLayout();
-            _ttsSettings.SuspendLayout();
-            _toastSettings.SuspendLayout();
-            _generalSettings.SuspendLayout();
-            _testSettings.SuspendLayout();
-            SuspendLayout();
+            this._label1 = new System.Windows.Forms.Label();
+            this._languageValue = new System.Windows.Forms.TextBox();
+            this._languageComboBox = new System.Windows.Forms.ComboBox();
+            this._enableTestEnvironment = new System.Windows.Forms.CheckBox();
+            this._ttsCheckBox = new System.Windows.Forms.CheckBox();
+            this._persistToasts = new System.Windows.Forms.CheckBox();
+            this._enableLegacyToast = new System.Windows.Forms.CheckBox();
+            this._disableToasts = new System.Windows.Forms.CheckBox();
+            this._appTabControl = new System.Windows.Forms.TabControl();
+            this._mainTabPage = new System.Windows.Forms.TabPage();
+            this._mainTableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this._button1 = new System.Windows.Forms.Button();
+            this._richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this._appTitle = new System.Windows.Forms.Label();
+            this._copyrightLink = new System.Windows.Forms.LinkLabel();
+            this._settingsPage = new System.Windows.Forms.TabPage();
+            this._settingsPanel = new System.Windows.Forms.Panel();
+            this._testSettings = new System.Windows.Forms.GroupBox();
+            this._settingsTableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this._telegramSettings = new System.Windows.Forms.GroupBox();
+            this._chatIdTextBox = new System.Windows.Forms.TextBox();
+            this._ChatIdLabel = new System.Windows.Forms.Label();
+            this._telegramTokenTextBox = new System.Windows.Forms.TextBox();
+            this._tokenLabel = new System.Windows.Forms.Label();
+            this._generalSettings = new System.Windows.Forms.GroupBox();
+            this._toastSettings = new System.Windows.Forms.GroupBox();
+            this._ttsSettings = new System.Windows.Forms.GroupBox();
+            this._telegramCheckBox = new System.Windows.Forms.CheckBox();
+            this._pushbulletSettings = new System.Windows.Forms.GroupBox();
+            this._pushbulletDeviceIdTextBox = new System.Windows.Forms.TextBox();
+            this._pushbulletDeviceIdlabel = new System.Windows.Forms.Label();
+            this._pushbulletTokenTextBox = new System.Windows.Forms.TextBox();
+            this._pushbulletTokenLabel = new System.Windows.Forms.Label();
+            this._pushbulletCheckbox = new System.Windows.Forms.CheckBox();
+            this._appTabControl.SuspendLayout();
+            this._mainTabPage.SuspendLayout();
+            this._mainTableLayout.SuspendLayout();
+            this._settingsPage.SuspendLayout();
+            this._settingsPanel.SuspendLayout();
+            this._testSettings.SuspendLayout();
+            this._settingsTableLayout.SuspendLayout();
+            this._telegramSettings.SuspendLayout();
+            this._generalSettings.SuspendLayout();
+            this._toastSettings.SuspendLayout();
+            this._ttsSettings.SuspendLayout();
+            this._pushbulletSettings.SuspendLayout();
+            this.SuspendLayout();
             // 
             // _label1
             // 
-            _label1.AutoSize = true;
-            _label1.Location = new Point(3, 23);
-            _label1.Name = "_label1";
-            _label1.TabStop = false;
-            _label1.Text = "Language";
-            //
+            this._label1.AutoSize = true;
+            this._label1.Location = new System.Drawing.Point(3, 23);
+            this._label1.Name = "_label1";
+            this._label1.Size = new System.Drawing.Size(55, 13);
+            this._label1.TabIndex = 0;
+            this._label1.Text = "Language";
+            // 
             // _languageValue
-            //
-            _languageValue.Visible = false;
-            _languageValue.Name = "_languageValue";
-            _languageValue.TabStop = false;
+            // 
+            this._languageValue.Location = new System.Drawing.Point(0, 0);
+            this._languageValue.Name = "_languageValue";
+            this._languageValue.Size = new System.Drawing.Size(100, 20);
+            this._languageValue.TabIndex = 0;
+            this._languageValue.TabStop = false;
+            this._languageValue.Visible = false;
             // 
             // _languageComboBox
             // 
-            _languageComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            _languageComboBox.FormattingEnabled = true;
-            _languageComboBox.Location = new Point(80, 23);
-            _languageComboBox.Name = "_languageComboBox";
-            _languageComboBox.Size = new Size(130, 25);
-            _languageComboBox.TabIndex = 0;
-            // 
-            // _disableToasts
-            // 
-            _disableToasts.AutoSize = true;
-            _disableToasts.Location = new Point(6, 22);
-            _disableToasts.Name = "_disableToasts";
-            _disableToasts.TabIndex = 1;
-            _disableToasts.Text = "Disable Toasts";
-            _disableToasts.UseVisualStyleBackColor = true;
-            _disableToasts.CheckStateChanged += DisableToastsOnCheckedChanged;
-            // 
-            // _persistToasts
-            // 
-            _persistToasts.AutoSize = true;
-            _persistToasts.Location = new Point(6, 45);
-            _persistToasts.Name = "_persistToasts";
-            _persistToasts.TabIndex = 2;
-            _persistToasts.Text = "Make Toasts Persistent";
-            _persistToasts.UseVisualStyleBackColor = true;
-            _persistToasts.CheckStateChanged += PersistToastsOnCheckedChanged;
-            // 
-            // _enableLegacyToast
-            // 
-            _enableLegacyToast.AutoSize = true;
-            _enableLegacyToast.Location = new Point(6, 68);
-            _enableLegacyToast.Name = "_enableLegacyToast";
-            _enableLegacyToast.TabIndex = 3;
-            _enableLegacyToast.Text = "Enable Legacy Toasts";
-            _enableLegacyToast.UseVisualStyleBackColor = true;
-            _enableLegacyToast.CheckStateChanged += EnableLegacyToastsOnCheckedChanged;
-            // 
-            // _ttsCheckBox
-            // 
-            _ttsCheckBox.AutoSize = true;
-            _ttsCheckBox.Location = new Point(6, 22);
-            _ttsCheckBox.Name = "_ttsCheckBox";
-            _ttsCheckBox.TabIndex = 4;
-            _ttsCheckBox.Text = "Enable Text To Speech";
-            _ttsCheckBox.UseVisualStyleBackColor = true;
-            _ttsCheckBox.CheckStateChanged += EnableTtsOnCheckedChanged;
+            this._languageComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this._languageComboBox.FormattingEnabled = true;
+            this._languageComboBox.Location = new System.Drawing.Point(80, 23);
+            this._languageComboBox.Name = "_languageComboBox";
+            this._languageComboBox.Size = new System.Drawing.Size(130, 21);
+            this._languageComboBox.TabIndex = 0;
             // 
             // _enableTestEnvironment
             // 
-            _enableTestEnvironment.AutoSize = true;
-            _enableTestEnvironment.Location = new Point(6, 20);
-            _enableTestEnvironment.Name = "_enableTestEnvironment";
-            _enableTestEnvironment.TabIndex = 5;
-            _enableTestEnvironment.Text = "Enable Test Environment";
-            _enableTestEnvironment.UseVisualStyleBackColor = true;
+            this._enableTestEnvironment.AutoSize = true;
+            this._enableTestEnvironment.Location = new System.Drawing.Point(6, 20);
+            this._enableTestEnvironment.Name = "_enableTestEnvironment";
+            this._enableTestEnvironment.Size = new System.Drawing.Size(145, 17);
+            this._enableTestEnvironment.TabIndex = 5;
+            this._enableTestEnvironment.Text = "Enable Test Environment";
+            this._enableTestEnvironment.UseVisualStyleBackColor = true;
+            // 
+            // _ttsCheckBox
+            // 
+            this._ttsCheckBox.AutoSize = true;
+            this._ttsCheckBox.Location = new System.Drawing.Point(6, 22);
+            this._ttsCheckBox.Name = "_ttsCheckBox";
+            this._ttsCheckBox.Size = new System.Drawing.Size(139, 17);
+            this._ttsCheckBox.TabIndex = 4;
+            this._ttsCheckBox.Text = "Enable Text To Speech";
+            this._ttsCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // _persistToasts
+            // 
+            this._persistToasts.AutoSize = true;
+            this._persistToasts.Location = new System.Drawing.Point(6, 45);
+            this._persistToasts.Name = "_persistToasts";
+            this._persistToasts.Size = new System.Drawing.Size(137, 17);
+            this._persistToasts.TabIndex = 2;
+            this._persistToasts.Text = "Make Toasts Persistent";
+            this._persistToasts.UseVisualStyleBackColor = true;
+            // 
+            // _enableLegacyToast
+            // 
+            this._enableLegacyToast.AutoSize = true;
+            this._enableLegacyToast.Location = new System.Drawing.Point(6, 68);
+            this._enableLegacyToast.Name = "_enableLegacyToast";
+            this._enableLegacyToast.Size = new System.Drawing.Size(132, 17);
+            this._enableLegacyToast.TabIndex = 3;
+            this._enableLegacyToast.Text = "Enable Legacy Toasts";
+            this._enableLegacyToast.UseVisualStyleBackColor = true;
+            // 
+            // _disableToasts
+            // 
+            this._disableToasts.AutoSize = true;
+            this._disableToasts.Location = new System.Drawing.Point(6, 22);
+            this._disableToasts.Name = "_disableToasts";
+            this._disableToasts.Size = new System.Drawing.Size(96, 17);
+            this._disableToasts.TabIndex = 1;
+            this._disableToasts.Text = "Disable Toasts";
+            this._disableToasts.UseVisualStyleBackColor = true;
             // 
             // _appTabControl
-            //
-            _appTabControl.Dock = DockStyle.Fill;
-            _appTabControl.Controls.Add(_mainTabPage);
-            _appTabControl.Controls.Add(_settingsPage);
-            _appTabControl.Location = new Point(4, 4);
-            _appTabControl.Name = "_appTabControl";
-            _appTabControl.SelectedIndex = 0;
-            _appTabControl.TabStop = false;
+            // 
+            this._appTabControl.Controls.Add(this._mainTabPage);
+            this._appTabControl.Controls.Add(this._settingsPage);
+            this._appTabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._appTabControl.Location = new System.Drawing.Point(0, 0);
+            this._appTabControl.Name = "_appTabControl";
+            this._appTabControl.SelectedIndex = 0;
+            this._appTabControl.Size = new System.Drawing.Size(948, 606);
+            this._appTabControl.TabIndex = 0;
+            this._appTabControl.TabStop = false;
             // 
             // _mainTabPage
             // 
-            _mainTabPage.Dock = DockStyle.Fill;
-            _mainTabPage.Controls.Add(_mainTableLayout);
-            _mainTabPage.Location = new Point(4, 22);
-            _mainTabPage.Name = "_mainTabPage";
-            _mainTabPage.Padding = new Padding(3);
-            _mainTabPage.TabStop = false;
-            _mainTabPage.Text = "Main";
-            _mainTabPage.ToolTipText = "Shows main info and logs";
-            _mainTabPage.UseVisualStyleBackColor = true;
+            this._mainTabPage.Controls.Add(this._mainTableLayout);
+            this._mainTabPage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._mainTabPage.Location = new System.Drawing.Point(4, 22);
+            this._mainTabPage.Name = "_mainTabPage";
+            this._mainTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this._mainTabPage.Size = new System.Drawing.Size(940, 580);
+            this._mainTabPage.TabIndex = 0;
+            this._mainTabPage.Text = "Main";
+            this._mainTabPage.ToolTipText = "Shows main info and logs";
+            this._mainTabPage.UseVisualStyleBackColor = true;
             // 
             // _mainTableLayout
             // 
-            _mainTableLayout.Dock = DockStyle.Fill;
-            _mainTableLayout.ColumnCount = 3;
-            _mainTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
-            _mainTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            _mainTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
-            _mainTableLayout.Controls.Add(_button1, 2, 0);
-            _mainTableLayout.Controls.Add(_richTextBox1, 0, 1);
-            _mainTableLayout.Controls.Add(_appTitle, 0, 0);
-            _mainTableLayout.Controls.Add(_copyrightLink, 1, 0);
-            _mainTableLayout.Location = new Point(0, 3);
-            _mainTableLayout.Name = "_mainTableLayout";
-            _mainTableLayout.RowCount = 2;
-            _mainTableLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            _mainTableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            _mainTableLayout.TabStop = false;
+            this._mainTableLayout.ColumnCount = 3;
+            this._mainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this._mainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this._mainTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this._mainTableLayout.Controls.Add(this._button1, 2, 0);
+            this._mainTableLayout.Controls.Add(this._richTextBox1, 0, 1);
+            this._mainTableLayout.Controls.Add(this._appTitle, 0, 0);
+            this._mainTableLayout.Controls.Add(this._copyrightLink, 1, 0);
+            this._mainTableLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._mainTableLayout.Location = new System.Drawing.Point(3, 3);
+            this._mainTableLayout.Name = "_mainTableLayout";
+            this._mainTableLayout.RowCount = 2;
+            this._mainTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this._mainTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this._mainTableLayout.Size = new System.Drawing.Size(934, 574);
+            this._mainTableLayout.TabIndex = 0;
             // 
             // _button1
             // 
-            _button1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
-            _button1.Name = "_button1";
-            _button1.MinimumSize = new Size(100, 25);
-            _button1.TabIndex = 0;
-            _button1.Text = "Clear Logs";
-            _button1.UseVisualStyleBackColor = true;
-            _button1.Click += ClearLogsButton_Click;
-            _button1.AutoSize = true;
+            this._button1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._button1.AutoSize = true;
+            this._button1.Location = new System.Drawing.Point(831, 3);
+            this._button1.MinimumSize = new System.Drawing.Size(100, 25);
+            this._button1.Name = "_button1";
+            this._button1.Size = new System.Drawing.Size(100, 25);
+            this._button1.TabIndex = 0;
+            this._button1.Text = "Clear Logs";
+            this._button1.UseVisualStyleBackColor = true;
             // 
             // _richTextBox1
-            //
-            _richTextBox1.Dock = DockStyle.Fill;
-            _richTextBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
-            _mainTableLayout.SetColumnSpan(_richTextBox1, 3);
-            _richTextBox1.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            _richTextBox1.Location = new Point(3, 32);
-            _richTextBox1.Name = "_richTextBox1";
-            _richTextBox1.ReadOnly = true;
-            _richTextBox1.TabIndex = 1;
-            _richTextBox1.Text = "";
+            // 
+            this._richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._mainTableLayout.SetColumnSpan(this._richTextBox1, 3);
+            this._richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._richTextBox1.Location = new System.Drawing.Point(3, 34);
+            this._richTextBox1.Name = "_richTextBox1";
+            this._richTextBox1.ReadOnly = true;
+            this._richTextBox1.Size = new System.Drawing.Size(928, 537);
+            this._richTextBox1.TabIndex = 1;
+            this._richTextBox1.Text = "";
             // 
             // _appTitle
             // 
-            _appTitle.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom;
-            _appTitle.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            _appTitle.Location = new Point(3, 0);
-            _appTitle.Name = "_appTitle";
-            _appTitle.TabStop = false;
-            _appTitle.Text = "DFAssist ~";
-            _appTitle.TextAlign = ContentAlignment.MiddleLeft;
-            _appTitle.AutoSize = true;
+            this._appTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this._appTitle.AutoSize = true;
+            this._appTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._appTitle.Location = new System.Drawing.Point(3, 0);
+            this._appTitle.Name = "_appTitle";
+            this._appTitle.Size = new System.Drawing.Size(97, 31);
+            this._appTitle.TabIndex = 2;
+            this._appTitle.Text = "DFAssist ~";
+            this._appTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // _copyrightLink
             // 
-            _copyrightLink.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom;
-            _copyrightLink.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            _copyrightLink.LinkBehavior = LinkBehavior.HoverUnderline;
-            _copyrightLink.Location = new Point(106, 0);
-            _copyrightLink.Name = "_copyrightLink";
-            _copyrightLink.TabIndex = 2;
-            _copyrightLink.TabStop = true;
-            _copyrightLink.Text = "© easly1989";
-            _copyrightLink.TextAlign = ContentAlignment.MiddleLeft;
-            _copyrightLink.AutoSize = true;
+            this._copyrightLink.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this._copyrightLink.AutoSize = true;
+            this._copyrightLink.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._copyrightLink.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this._copyrightLink.Location = new System.Drawing.Point(106, 0);
+            this._copyrightLink.Name = "_copyrightLink";
+            this._copyrightLink.Size = new System.Drawing.Size(107, 31);
+            this._copyrightLink.TabIndex = 2;
+            this._copyrightLink.TabStop = true;
+            this._copyrightLink.Text = "© easly1989";
+            this._copyrightLink.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // _settingsPage
             // 
-            _settingsPage.Dock = DockStyle.Fill;
-            _settingsPage.Controls.Add(_settingsPanel);
-            _settingsPage.Location = new Point(4, 22);
-            _settingsPage.Name = "_settingsPage";
-            _settingsPage.Padding = new Padding(3);
-            _settingsPage.TabStop = false;
-            _settingsPage.Text = "Settings";
-            _settingsPage.ToolTipText = "Change Settings for DFAssist";
-            _settingsPage.UseVisualStyleBackColor = true;
+            this._settingsPage.Controls.Add(this._settingsPanel);
+            this._settingsPage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._settingsPage.Location = new System.Drawing.Point(4, 22);
+            this._settingsPage.Name = "_settingsPage";
+            this._settingsPage.Padding = new System.Windows.Forms.Padding(3);
+            this._settingsPage.Size = new System.Drawing.Size(940, 580);
+            this._settingsPage.TabIndex = 1;
+            this._settingsPage.Text = "Settings";
+            this._settingsPage.ToolTipText = "Change Settings for DFAssist";
+            this._settingsPage.UseVisualStyleBackColor = true;
             // 
             // _settingsPanel
-            //
-            _settingsPanel.Dock = DockStyle.Fill;
-            _settingsPanel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
-            _settingsPanel.Controls.Add(_settingsTableLayout);
-            _settingsPanel.Name = "_settingsPanel";
-            _settingsPanel.TabStop = false;
-            _settingsPanel.AutoScroll = true;
             // 
-            // _settingsTableLayout
-            // 
-            _settingsTableLayout.Dock = DockStyle.Fill;
-            _settingsTableLayout.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            _settingsTableLayout.AutoSize = true;
-            _settingsTableLayout.AutoSizeMode = AutoSizeMode.GrowOnly;
-            _settingsTableLayout.ColumnCount = 1;
-            _settingsTableLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            _settingsTableLayout.Controls.Add(_generalSettings, 0, 0);
-            _settingsTableLayout.Controls.Add(_toastSettings, 0, 1);
-            _settingsTableLayout.Controls.Add(_ttsSettings, 0, 2);
-            _settingsTableLayout.Controls.Add(_testSettings, 0, 3);
-            _settingsTableLayout.Location = new Point(0, 3);
-            _settingsTableLayout.Name = "_settingsTableLayout";
-            _settingsTableLayout.RowCount = 5;
-            _settingsTableLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            _settingsTableLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            _settingsTableLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            _settingsTableLayout.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-            _settingsTableLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            _settingsTableLayout.TabStop = false;
-            // 
-            // _generalSettings
-            // 
-            Dock = DockStyle.Top;
-            _generalSettings.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            _generalSettings.Controls.Add(_label1);
-            _generalSettings.Controls.Add(_languageComboBox);
-            _generalSettings.Name = "_generalSettings";
-            _generalSettings.TabStop = false;
-            _generalSettings.Text = "General Settings";
-            // 
-            // _toastSettings
-            // 
-            Dock = DockStyle.Top;
-            _toastSettings.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            _toastSettings.Controls.Add(_disableToasts);
-            _toastSettings.Controls.Add(_enableLegacyToast);
-            _toastSettings.Controls.Add(_persistToasts);
-            _toastSettings.Name = "_toastSettings";
-            _toastSettings.TabStop = false;
-            _toastSettings.Text = "Toasts Settings";
-            // 
-            // _ttsSettings
-            // 
-            Dock = DockStyle.Top;
-            _ttsSettings.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            _ttsSettings.Controls.Add(_ttsCheckBox);
-            _ttsSettings.Name = "_ttsSettings";
-            _ttsSettings.TabStop = false;
-            _ttsSettings.Text = "Text To Speech Settings";
+            this._settingsPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._settingsPanel.AutoScroll = true;
+            this._settingsPanel.Controls.Add(this._pushbulletSettings);
+            this._settingsPanel.Controls.Add(this._settingsTableLayout);
+            this._settingsPanel.Location = new System.Drawing.Point(0, 0);
+            this._settingsPanel.Name = "_settingsPanel";
+            this._settingsPanel.Size = new System.Drawing.Size(940, 580);
+            this._settingsPanel.TabIndex = 0;
             // 
             // _testSettings
             // 
-            Dock = DockStyle.Top;
-            _testSettings.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            _testSettings.Controls.Add(_enableTestEnvironment);
-            _testSettings.Name = "_testSettings";
-            _testSettings.TabStop = false;
-            _testSettings.Text = "Test Settings";
+            this._testSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._testSettings.Controls.Add(this._enableTestEnvironment);
+            this._testSettings.Location = new System.Drawing.Point(481, 0);
+            this._testSettings.Name = "_testSettings";
+            this._testSettings.Size = new System.Drawing.Size(457, 100);
+            this._testSettings.TabIndex = 3;
+            this._testSettings.TabStop = false;
+            this._testSettings.Text = "Test Settings";
+            // 
+            // _settingsTableLayout
+            // 
+            this._settingsTableLayout.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._settingsTableLayout.AutoSize = true;
+            this._settingsTableLayout.ColumnCount = 1;
+            this._settingsTableLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this._settingsTableLayout.Controls.Add(this._telegramSettings, 0, 4);
+            this._settingsTableLayout.Controls.Add(this._generalSettings, 0, 0);
+            this._settingsTableLayout.Controls.Add(this._toastSettings, 0, 1);
+            this._settingsTableLayout.Controls.Add(this._ttsSettings, 0, 2);
+            this._settingsTableLayout.Location = new System.Drawing.Point(0, 3);
+            this._settingsTableLayout.Name = "_settingsTableLayout";
+            this._settingsTableLayout.RowCount = 5;
+            this._settingsTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this._settingsTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this._settingsTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this._settingsTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this._settingsTableLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this._settingsTableLayout.Size = new System.Drawing.Size(940, 424);
+            this._settingsTableLayout.TabIndex = 0;
+            // 
+            // _telegramSettings
+            // 
+            this._telegramSettings.Controls.Add(this._chatIdTextBox);
+            this._telegramSettings.Controls.Add(this._ChatIdLabel);
+            this._telegramSettings.Controls.Add(this._telegramTokenTextBox);
+            this._telegramSettings.Controls.Add(this._tokenLabel);
+            this._telegramSettings.Controls.Add(this._telegramCheckBox);
+            this._telegramSettings.Location = new System.Drawing.Point(3, 321);
+            this._telegramSettings.Name = "_telegramSettings";
+            this._telegramSettings.Size = new System.Drawing.Size(934, 100);
+            this._telegramSettings.TabIndex = 1;
+            this._telegramSettings.TabStop = false;
+            this._telegramSettings.Text = "Telegram Settings";
+            // 
+            // _chatIdTextBox
+            // 
+            this._chatIdTextBox.Location = new System.Drawing.Point(111, 73);
+            this._chatIdTextBox.Name = "_chatIdTextBox";
+            this._chatIdTextBox.Size = new System.Drawing.Size(390, 20);
+            this._chatIdTextBox.TabIndex = 4;
+            // 
+            // _ChatIdLabel
+            // 
+            this._ChatIdLabel.AutoSize = true;
+            this._ChatIdLabel.Location = new System.Drawing.Point(7, 73);
+            this._ChatIdLabel.Name = "_ChatIdLabel";
+            this._ChatIdLabel.Size = new System.Drawing.Size(41, 13);
+            this._ChatIdLabel.TabIndex = 3;
+            this._ChatIdLabel.Text = "Chat Id";
+            // 
+            // _telegramTokenTextBox
+            // 
+            this._telegramTokenTextBox.Location = new System.Drawing.Point(111, 44);
+            this._telegramTokenTextBox.Name = "_telegramTokenTextBox";
+            this._telegramTokenTextBox.Size = new System.Drawing.Size(390, 20);
+            this._telegramTokenTextBox.TabIndex = 2;
+            // 
+            // _tokenLabel
+            // 
+            this._tokenLabel.AutoSize = true;
+            this._tokenLabel.Location = new System.Drawing.Point(7, 44);
+            this._tokenLabel.Name = "_tokenLabel";
+            this._tokenLabel.Size = new System.Drawing.Size(38, 13);
+            this._tokenLabel.TabIndex = 1;
+            this._tokenLabel.Text = "Token";
+            // 
+            // _generalSettings
+            // 
+            this._generalSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._generalSettings.Controls.Add(this._testSettings);
+            this._generalSettings.Controls.Add(this._label1);
+            this._generalSettings.Controls.Add(this._languageComboBox);
+            this._generalSettings.Location = new System.Drawing.Point(3, 3);
+            this._generalSettings.Name = "_generalSettings";
+            this._generalSettings.Size = new System.Drawing.Size(934, 100);
+            this._generalSettings.TabIndex = 0;
+            this._generalSettings.TabStop = false;
+            this._generalSettings.Text = "General Settings";
+            // 
+            // _toastSettings
+            // 
+            this._toastSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._toastSettings.Controls.Add(this._disableToasts);
+            this._toastSettings.Controls.Add(this._enableLegacyToast);
+            this._toastSettings.Controls.Add(this._persistToasts);
+            this._toastSettings.Location = new System.Drawing.Point(3, 109);
+            this._toastSettings.Name = "_toastSettings";
+            this._toastSettings.Size = new System.Drawing.Size(934, 100);
+            this._toastSettings.TabIndex = 1;
+            this._toastSettings.TabStop = false;
+            this._toastSettings.Text = "Toasts Settings";
+            // 
+            // _ttsSettings
+            // 
+            this._ttsSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._ttsSettings.Controls.Add(this._ttsCheckBox);
+            this._ttsSettings.Location = new System.Drawing.Point(3, 215);
+            this._ttsSettings.Name = "_ttsSettings";
+            this._ttsSettings.Size = new System.Drawing.Size(934, 100);
+            this._ttsSettings.TabIndex = 2;
+            this._ttsSettings.TabStop = false;
+            this._ttsSettings.Text = "Text To Speech Settings";
+            // 
+            // _telegramCheckBox
+            // 
+            this._telegramCheckBox.AutoSize = true;
+            this._telegramCheckBox.Location = new System.Drawing.Point(6, 20);
+            this._telegramCheckBox.Name = "_telegramCheckBox";
+            this._telegramCheckBox.Size = new System.Drawing.Size(167, 17);
+            this._telegramCheckBox.TabIndex = 0;
+            this._telegramCheckBox.Text = "Enable Telegram Notifications";
+            this._telegramCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // _pushbulletSettings
+            // 
+            this._pushbulletSettings.Controls.Add(this._pushbulletDeviceIdTextBox);
+            this._pushbulletSettings.Controls.Add(this._pushbulletDeviceIdlabel);
+            this._pushbulletSettings.Controls.Add(this._pushbulletTokenTextBox);
+            this._pushbulletSettings.Controls.Add(this._pushbulletTokenLabel);
+            this._pushbulletSettings.Controls.Add(this._pushbulletCheckbox);
+            this._pushbulletSettings.Location = new System.Drawing.Point(4, 431);
+            this._pushbulletSettings.Name = "_pushbulletSettings";
+            this._pushbulletSettings.Size = new System.Drawing.Size(933, 100);
+            this._pushbulletSettings.TabIndex = 1;
+            this._pushbulletSettings.TabStop = false;
+            this._pushbulletSettings.Text = "Pushbullet Settings";
+            // 
+            // _pushbulletDeviceIdTextBox
+            // 
+            this._pushbulletDeviceIdTextBox.Location = new System.Drawing.Point(110, 72);
+            this._pushbulletDeviceIdTextBox.Name = "_pushbulletDeviceIdTextBox";
+            this._pushbulletDeviceIdTextBox.Size = new System.Drawing.Size(390, 20);
+            this._pushbulletDeviceIdTextBox.TabIndex = 9;
+            // 
+            // _pushbulletDeviceIdlabel
+            // 
+            this._pushbulletDeviceIdlabel.AutoSize = true;
+            this._pushbulletDeviceIdlabel.Location = new System.Drawing.Point(6, 72);
+            this._pushbulletDeviceIdlabel.Name = "_pushbulletDeviceIdlabel";
+            this._pushbulletDeviceIdlabel.Size = new System.Drawing.Size(53, 13);
+            this._pushbulletDeviceIdlabel.TabIndex = 8;
+            this._pushbulletDeviceIdlabel.Text = "Device Id";
+            // 
+            // _pushbulletTokenTextBox
+            // 
+            this._pushbulletTokenTextBox.Location = new System.Drawing.Point(110, 43);
+            this._pushbulletTokenTextBox.Name = "_pushbulletTokenTextBox";
+            this._pushbulletTokenTextBox.Size = new System.Drawing.Size(390, 20);
+            this._pushbulletTokenTextBox.TabIndex = 7;
+            // 
+            // _pushbulletTokenLabel
+            // 
+            this._pushbulletTokenLabel.AutoSize = true;
+            this._pushbulletTokenLabel.Location = new System.Drawing.Point(6, 43);
+            this._pushbulletTokenLabel.Name = "_pushbulletTokenLabel";
+            this._pushbulletTokenLabel.Size = new System.Drawing.Size(76, 13);
+            this._pushbulletTokenLabel.TabIndex = 6;
+            this._pushbulletTokenLabel.Text = "Access Token";
+            // 
+            // _pushbulletCheckbox
+            // 
+            this._pushbulletCheckbox.AutoSize = true;
+            this._pushbulletCheckbox.Location = new System.Drawing.Point(5, 19);
+            this._pushbulletCheckbox.Name = "_pushbulletCheckbox";
+            this._pushbulletCheckbox.Size = new System.Drawing.Size(172, 17);
+            this._pushbulletCheckbox.TabIndex = 5;
+            this._pushbulletCheckbox.Text = "Enable Pushbullet Notifications";
+            this._pushbulletCheckbox.UseVisualStyleBackColor = true;
             // 
             // MainControl
             // 
-            Dock = DockStyle.Fill;
-            Controls.Add(_appTabControl);
-            Name = "MainControl";
-            _appTabControl.ResumeLayout(false);
-            _mainTabPage.ResumeLayout(false);
-            _mainTableLayout.ResumeLayout(false);
-            _mainTableLayout.PerformLayout();
-            _settingsPage.ResumeLayout(false);
-            _settingsPage.PerformLayout();
-            _settingsPanel.ResumeLayout(false);
-            _settingsPanel.PerformLayout();
-            _settingsTableLayout.ResumeLayout(false);
-            _settingsTableLayout.PerformLayout();
-            _ttsSettings.ResumeLayout(false);
-            _ttsSettings.PerformLayout();
-            _toastSettings.ResumeLayout(false);
-            _toastSettings.PerformLayout();
-            _generalSettings.ResumeLayout(false);
-            _generalSettings.PerformLayout();
-            _testSettings.ResumeLayout(false);
-            _testSettings.PerformLayout();
-            ResumeLayout(false);
+            this.Controls.Add(this._appTabControl);
+            this.Name = "MainControl";
+            this.Size = new System.Drawing.Size(948, 606);
+            this._appTabControl.ResumeLayout(false);
+            this._mainTabPage.ResumeLayout(false);
+            this._mainTableLayout.ResumeLayout(false);
+            this._mainTableLayout.PerformLayout();
+            this._settingsPage.ResumeLayout(false);
+            this._settingsPanel.ResumeLayout(false);
+            this._settingsPanel.PerformLayout();
+            this._testSettings.ResumeLayout(false);
+            this._testSettings.PerformLayout();
+            this._settingsTableLayout.ResumeLayout(false);
+            this._telegramSettings.ResumeLayout(false);
+            this._telegramSettings.PerformLayout();
+            this._generalSettings.ResumeLayout(false);
+            this._generalSettings.PerformLayout();
+            this._toastSettings.ResumeLayout(false);
+            this._toastSettings.PerformLayout();
+            this._ttsSettings.ResumeLayout(false);
+            this._ttsSettings.PerformLayout();
+            this._pushbulletSettings.ResumeLayout(false);
+            this._pushbulletSettings.PerformLayout();
+            this.ResumeLayout(false);
+
         }
 
         private void DisableToastsOnCheckedChanged(object sender, EventArgs e)
@@ -747,6 +926,10 @@ namespace DFAssist
             _toastSettings.Text = Localization.GetText("ui-toast-settings-group");
             _ttsSettings.Text = Localization.GetText("ui-tts-settings-group");
             _testSettings.Text = Localization.GetText("ui-test-settings-group");
+            _telegramCheckBox.Text = Localization.GetText("ui-telegram-display-text");
+            _tokenLabel.Text = Localization.GetText("ui-telegram-token-display-text");
+            _ChatIdLabel.Text = Localization.GetText("ui-telegram-chatid-display-text");
+            _telegramSettings.Text = Localization.GetText("ui-telegram-settings-group");
 
             Logger.Debug("Localization for UI Updated!");
         }
@@ -771,9 +954,86 @@ namespace DFAssist
                 case EventType.MATCH_ALERT:
                     var title = head + (args[0] != 0 ? GetRouletteName(args[0]) : Localization.GetText("app-name"));
                     var testing = _enableTestEnvironment.Checked ? "[Code: " + args[1] + "] " : string.Empty;
+                    SendPushbulletNotification(title, ">> " + GetInstanceName(args[1]));
+                    SendTelegramNotification(title, ">> " + GetInstanceName(args[1]));
                     ToastWindowNotification(title, ">> " + testing + GetInstanceName(args[1]));
                     TtsNotification(GetInstanceName(args[1]));
                     break;
+            }
+        }
+
+        private void SendPushbulletNotification(string title, string messageText)
+        {
+            Logger.Debug("Request received to send Pushbullet notification");
+            if (!_pushbulletCheckbox.Checked)
+            {
+                Logger.Debug("Pushbullet notifications are disabled");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(_pushbulletTokenTextBox.Text))
+            {
+                Logger.Debug("Pushbullet Token is missing.");
+                return;
+            }
+
+            try
+            {
+                PushbulletClient client = new PushbulletClient(_pushbulletTokenTextBox.Text);
+                PushbulletSharp.Models.Requests.PushNoteRequest request = new PushbulletSharp.Models.Requests.PushNoteRequest() { Body = messageText, Title = title };
+                if (!string.IsNullOrWhiteSpace(_pushbulletDeviceIdTextBox.Text)) request.DeviceIden = _pushbulletDeviceIdTextBox.Text;
+
+                var response = client.PushNote(request);
+
+                Logger.Debug("Message pushed to Pushbullet with Id " + response.ReceiverIden);
+            }
+            catch (Exception ex)
+            {
+                Logger.Exception(ex, "Unable to push Pushbullet notification.");
+            }
+        }
+
+        private void SendTelegramNotification(string title, string messageText)
+        {
+            Logger.Debug("Request received to send Telegram notification");
+            if(!_telegramCheckBox.Checked)
+            {
+                Logger.Debug("Telegram notifications are disabled");
+                return;
+            }
+
+            if(string.IsNullOrWhiteSpace(_telegramTokenTextBox.Text))
+            {
+                Logger.Debug("Token is missing.");
+                return;
+            }
+
+            if(string.IsNullOrWhiteSpace(_chatIdTextBox.Text))
+            {
+                Logger.Debug("Chat Id is missing");
+                return;
+            }
+
+            try
+            {
+                var botClient = new TelegramBotClient(_telegramTokenTextBox.Text);
+                Telegram.Bot.Types.ChatId chatId;
+                int chatIdInt = 0;
+                long chatIdentifier = 0;
+
+                if (int.TryParse(_chatIdTextBox.Text, out chatIdInt))
+                    chatId = new Telegram.Bot.Types.ChatId(chatIdInt);
+                else if (long.TryParse(_chatIdTextBox.Text, out chatIdentifier))
+                    chatId = new Telegram.Bot.Types.ChatId(chatIdentifier);
+                else
+                    chatId = new Telegram.Bot.Types.ChatId(_chatIdTextBox.Text);
+
+                var message = botClient.SendTextMessageAsync(chatId, title + " " + messageText).Result;
+                Logger.Debug($"Telegram notification sent with message Id {message.MessageId}");
+            }
+            catch(Exception ex)
+            {
+                Logger.Exception(ex, "Unable to send Telegram notification.");
             }
         }
 
@@ -958,6 +1218,12 @@ namespace DFAssist
             _xmlSettingsSerializer.AddControlSetting(_persistToasts.Name, _persistToasts);
             _xmlSettingsSerializer.AddControlSetting(_enableTestEnvironment.Name, _enableTestEnvironment);
             _xmlSettingsSerializer.AddControlSetting(_enableLegacyToast.Name, _enableLegacyToast);
+            _xmlSettingsSerializer.AddControlSetting(_telegramCheckBox.Name, _telegramCheckBox);
+            _xmlSettingsSerializer.AddControlSetting(_telegramTokenTextBox.Name, _telegramTokenTextBox);
+            _xmlSettingsSerializer.AddControlSetting(_chatIdTextBox.Name, _chatIdTextBox);
+            _xmlSettingsSerializer.AddControlSetting(_pushbulletCheckbox.Name, _pushbulletCheckbox);
+            _xmlSettingsSerializer.AddControlSetting(_pushbulletDeviceIdTextBox.Name, _pushbulletDeviceIdTextBox);
+            _xmlSettingsSerializer.AddControlSetting(_pushbulletTokenTextBox.Name, _pushbulletTokenTextBox);
 
             if(File.Exists(_settingsFile))
                 using(var fileStream = new FileStream(_settingsFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
