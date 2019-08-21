@@ -56,6 +56,7 @@
   "l-queue-entered": "Q: Entered Instance Area",
   "l-queue-matched": "Q: Matched [{0}] - {1}",
   "l-queue-updated": "Q: Matching State Updated [{0}, {1}]",
+  "l-queue-order": "#{0} in queue for your role",
 
   "l-fate-occured-info": "F: {0} FATE spawned!",
 
@@ -67,6 +68,8 @@
   "ui-toast-notification-display-text": "Enable Toast Notifications",
   "ui-toast-notification-test-title": "If you see this...",
   "ui-toast-notification-test-message": "... Toasts works!",
+  "ui-telegram-notification-test-message": "... Telegram notification works!",
+  "ui-pushbullet-notification-test-message": "... Pushbullet notification works!",
 
   "ui-tts-notification-test-title": "If you hear this...",
   "ui-tts-notification-test-message": "... tts works!",
@@ -78,6 +81,10 @@
   "ui-telegram-display-text": "Enable Telegram Notifications",
   "ui-telegram-token-display-text": "Token",
   "ui-telegram-chatid-display-text": "Chat Id",
+
+  "ui-pushbullet-display-text": "Enable Pusbullet Notifications",
+  "ui-pushbullet-token-display-text": "Access Token",
+  "ui-pushbullet-deviceid-display-text": "Device Id",
 
   "ui-alerts-display-text": "Alerts",
   "ui-alerts-fate-display-text": "F.A.T.E.",
@@ -98,7 +105,8 @@
   "ui-toast-settings-group": "Toasts Settings",
   "ui-tts-settings-group": "Text To Speech Settings",
   "ui-test-settings-group": "Test Settings",
-  "ui-telegram-settings-group":  "Telegram Settings",
+  "ui-telegram-settings-group": "Telegram Settings",
+  "ui-pushbullet-settings-group": "Pushbullet Settings",
 
   "ui-persistent-toast-warning-title": "Persistent Toasts Warning!",
   "ui-persistent-toast-warning-message": "After making changes to the registry\nIt may be necessary to reboot the PC for the changes to take place!"

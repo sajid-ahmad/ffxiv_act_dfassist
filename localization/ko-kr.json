@@ -56,6 +56,7 @@
   "l-queue-entered": "Q: 임무 입장함",
   "l-queue-matched": "Q: 매칭됨 [{0}] - {1}",
   "l-queue-updated": "Q: 매칭 상태 업데이트됨 [{0}, {1}]",
+  "l-queue-order": "#{0} in queue for your role",
 
   "l-fate-occured-info": "F: {0} 돌발 발생!",
 
@@ -67,6 +68,8 @@
   "ui-toast-notification-display-text": "토스트 알림 사용",
   "ui-toast-notification-test-title": "이걸 보면...",
   "ui-toast-notification-test-message": "... 토스트가 작동합니다!",
+  "ui-telegram-notification-test-message": "... Telegram notification works!",
+  "ui-pushbullet-notification-test-message": "... Pushbullet notification works!",
 
   "ui-tts-notification-test-title": "이거 들으면...",
   "ui-tts-notification-test-message": "... 작품은!",
@@ -78,6 +81,10 @@
   "ui-telegram-display-text": "전보 알림 사용",
   "ui-telegram-token-display-text": "토큰",
   "ui-telegram-chatid-display-text": "채팅 ID",
+
+  "ui-pushbullet-display-text": "Enable Pusbullet Notifications",
+  "ui-pushbullet-token-display-text": "Access Token",
+  "ui-pushbullet-deviceid-display-text": "Device Id",
 
   "ui-alerts-display-text": "경고",
   "ui-alerts-fate-display-text": "돌발",

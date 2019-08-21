@@ -56,6 +56,7 @@
   "l-queue-entered": "Q: Entrée dans la zone instanciée",
   "l-queue-matched": "Q: Attente terminée [{0}] - {1}",
   "l-queue-updated": "Q: Mise à jour de la file d'attente [{0}, {1}]",
+  "l-queue-order": "#{0} in queue for your role",
 
   "l-fate-occured-info": "F: {0} ALEA en cours!",
 
@@ -67,6 +68,8 @@
   "ui-toast-notification-display-text": "Activer les notifications Toast",
   "ui-toast-notification-test-title": "Si tu vois ça...",
   "ui-toast-notification-test-message": "... Toasts fonctionne!",
+  "ui-telegram-notification-test-message": "... Telegram notification fonctionne!",
+  "ui-pushbullet-notification-test-message": "... Pushbullet notification fonctionne!",
 
   "ui-tts-notification-test-title": "Si tu entends ça...",
   "ui-tts-notification-test-message": "... tts fonctionne!",
@@ -78,6 +81,10 @@
   "ui-telegram-display-text": "Activer les notifications de Telegram",
   "ui-telegram-token-display-text": "Jeton",
   "ui-telegram-chatid-display-text": "Identifiant de chat",
+
+  "ui-pushbullet-display-text": "Activer les notifications de Pushbullet",
+  "ui-pushbullet-token-display-text": "Jeton",
+  "ui-pushbullet-deviceid-display-text": "Identifiant de device",
 
   "ui-alerts-display-text": "Alertes",
   "ui-alerts-fate-display-text": "A.L.E.A.",

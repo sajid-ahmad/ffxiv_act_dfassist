@@ -238,6 +238,7 @@ namespace DFAssist
                     byte healer;
                     var member = 0;
                     var instance = Data.GetInstance(code);
+                    var order = data[4];
 
                     if (_netCompatibility)
                     {
@@ -294,7 +295,7 @@ namespace DFAssist
                         // Duty Accepted status
                     }
 
-                    var memberinfo = $"{tank}/{instance.Tank}, {healer}/{instance.Healer}, {dps}/{instance.Dps} | {member}";
+                    var memberinfo = $"Tank: {tank}/{instance.Tank}, Healer: {healer}/{instance.Healer}, DPS: {dps}/{instance.Dps}, Member: {member}, Order: {order}";
                     Logger.Info("l-queue-updated", instance.Name, memberinfo);
                 }
                 else if (opcode == 0x0080)

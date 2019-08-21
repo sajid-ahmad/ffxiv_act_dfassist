@@ -1,5 +1,5 @@
 # Duty Finder Assist Plugin for ACT
-### Based on the work from [devunt](https://github.com/devunt/DFAssist) and [lalafellsleep](https://github.com/lalafellsleep/ACTFate)
+### Based on the work from [devunt](https://github.com/devunt/DFAssist), [lalafellsleep](https://github.com/lalafellsleep/ACTFate) and [easly1989](https://github.com/easly1989/ffxiv_act_dfassist)
 
 ![releases](https://img.shields.io/github/tag/easly1989/ffxiv_act_dfassist.svg)
 ![issues](https://img.shields.io/github/issues/easly1989/ffxiv_act_dfassist.svg)

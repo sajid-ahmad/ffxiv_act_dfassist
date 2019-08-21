@@ -56,6 +56,7 @@
   "l-queue-entered": "Q: インスタンスエリアに入りました",
   "l-queue-matched": "Q: 突入準備完了 [{0}] - {1}",
   "l-queue-updated": "Q: 申請状態が更新されました [{0}, {1}]",
+  "l-queue-order": "#{0} in queue for your role",
 
   "l-fate-occured-info": "F: {0} FATE発生!",
 
@@ -67,6 +68,8 @@
   "ui-toast-notification-display-text": "Toast通知を有効にする",
   "ui-toast-notification-test-title": "これを見たら...",
   "ui-toast-notification-test-message": "... トーストは機能する!",
+  "ui-telegram-notification-test-message": "... Telegram notification works!",
+  "ui-pushbullet-notification-test-message": "... Pushbullet notification works!",
 
   "ui-tts-notification-test-title": "これを聞いたら...",
   "ui-tts-notification-test-message": "... TTSは動作します!",
@@ -78,6 +81,10 @@
   "ui-telegram-display-text": "テレグラム通知を有効にする",
   "ui-telegram-token-display-text": "トークン",
   "ui-telegram-chatid-display-text": "チャットID",
+
+  "ui-pushbullet-display-text": "Enable Pusbullet Notifications",
+  "ui-pushbullet-token-display-text": "Access Token",
+  "ui-pushbullet-deviceid-display-text": "Device Id",
 
   "ui-alerts-display-text": "アラート",
   "ui-alerts-fate-display-text": "F.A.T.E.",

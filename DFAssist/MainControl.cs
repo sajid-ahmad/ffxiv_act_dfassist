@@ -145,35 +145,35 @@ namespace DFAssist
             this._copyrightLink = new System.Windows.Forms.LinkLabel();
             this._settingsPage = new System.Windows.Forms.TabPage();
             this._settingsPanel = new System.Windows.Forms.Panel();
-            this._testSettings = new System.Windows.Forms.GroupBox();
-            this._settingsTableLayout = new System.Windows.Forms.TableLayoutPanel();
-            this._telegramSettings = new System.Windows.Forms.GroupBox();
-            this._chatIdTextBox = new System.Windows.Forms.TextBox();
-            this._ChatIdLabel = new System.Windows.Forms.Label();
-            this._telegramTokenTextBox = new System.Windows.Forms.TextBox();
-            this._tokenLabel = new System.Windows.Forms.Label();
-            this._generalSettings = new System.Windows.Forms.GroupBox();
-            this._toastSettings = new System.Windows.Forms.GroupBox();
-            this._ttsSettings = new System.Windows.Forms.GroupBox();
-            this._telegramCheckBox = new System.Windows.Forms.CheckBox();
             this._pushbulletSettings = new System.Windows.Forms.GroupBox();
             this._pushbulletDeviceIdTextBox = new System.Windows.Forms.TextBox();
             this._pushbulletDeviceIdlabel = new System.Windows.Forms.Label();
             this._pushbulletTokenTextBox = new System.Windows.Forms.TextBox();
             this._pushbulletTokenLabel = new System.Windows.Forms.Label();
             this._pushbulletCheckbox = new System.Windows.Forms.CheckBox();
+            this._settingsTableLayout = new System.Windows.Forms.TableLayoutPanel();
+            this._telegramSettings = new System.Windows.Forms.GroupBox();
+            this._chatIdTextBox = new System.Windows.Forms.TextBox();
+            this._ChatIdLabel = new System.Windows.Forms.Label();
+            this._telegramTokenTextBox = new System.Windows.Forms.TextBox();
+            this._tokenLabel = new System.Windows.Forms.Label();
+            this._telegramCheckBox = new System.Windows.Forms.CheckBox();
+            this._generalSettings = new System.Windows.Forms.GroupBox();
+            this._testSettings = new System.Windows.Forms.GroupBox();
+            this._toastSettings = new System.Windows.Forms.GroupBox();
+            this._ttsSettings = new System.Windows.Forms.GroupBox();
             this._appTabControl.SuspendLayout();
             this._mainTabPage.SuspendLayout();
             this._mainTableLayout.SuspendLayout();
             this._settingsPage.SuspendLayout();
             this._settingsPanel.SuspendLayout();
-            this._testSettings.SuspendLayout();
+            this._pushbulletSettings.SuspendLayout();
             this._settingsTableLayout.SuspendLayout();
             this._telegramSettings.SuspendLayout();
             this._generalSettings.SuspendLayout();
+            this._testSettings.SuspendLayout();
             this._toastSettings.SuspendLayout();
             this._ttsSettings.SuspendLayout();
-            this._pushbulletSettings.SuspendLayout();
             this.SuspendLayout();
             // 
             // _label1
@@ -222,6 +222,7 @@ namespace DFAssist
             this._ttsCheckBox.TabIndex = 4;
             this._ttsCheckBox.Text = "Enable Text To Speech";
             this._ttsCheckBox.UseVisualStyleBackColor = true;
+            this._ttsCheckBox.CheckedChanged += new System.EventHandler(this._ttsCheckBox_CheckedChanged);
             // 
             // _persistToasts
             // 
@@ -252,6 +253,7 @@ namespace DFAssist
             this._disableToasts.TabIndex = 1;
             this._disableToasts.Text = "Disable Toasts";
             this._disableToasts.UseVisualStyleBackColor = true;
+            this._disableToasts.CheckedChanged += new System.EventHandler(this._disableToasts_CheckedChanged);
             // 
             // _appTabControl
             // 
@@ -379,17 +381,62 @@ namespace DFAssist
             this._settingsPanel.Size = new System.Drawing.Size(940, 580);
             this._settingsPanel.TabIndex = 0;
             // 
-            // _testSettings
+            // _pushbulletSettings
             // 
-            this._testSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this._testSettings.Controls.Add(this._enableTestEnvironment);
-            this._testSettings.Location = new System.Drawing.Point(481, 0);
-            this._testSettings.Name = "_testSettings";
-            this._testSettings.Size = new System.Drawing.Size(457, 100);
-            this._testSettings.TabIndex = 3;
-            this._testSettings.TabStop = false;
-            this._testSettings.Text = "Test Settings";
+            this._pushbulletSettings.Controls.Add(this._pushbulletDeviceIdTextBox);
+            this._pushbulletSettings.Controls.Add(this._pushbulletDeviceIdlabel);
+            this._pushbulletSettings.Controls.Add(this._pushbulletTokenTextBox);
+            this._pushbulletSettings.Controls.Add(this._pushbulletTokenLabel);
+            this._pushbulletSettings.Controls.Add(this._pushbulletCheckbox);
+            this._pushbulletSettings.Location = new System.Drawing.Point(4, 431);
+            this._pushbulletSettings.Name = "_pushbulletSettings";
+            this._pushbulletSettings.Size = new System.Drawing.Size(933, 100);
+            this._pushbulletSettings.TabIndex = 1;
+            this._pushbulletSettings.TabStop = false;
+            this._pushbulletSettings.Text = "Pushbullet Settings";
+            // 
+            // _pushbulletDeviceIdTextBox
+            // 
+            this._pushbulletDeviceIdTextBox.Location = new System.Drawing.Point(110, 72);
+            this._pushbulletDeviceIdTextBox.Name = "_pushbulletDeviceIdTextBox";
+            this._pushbulletDeviceIdTextBox.Size = new System.Drawing.Size(390, 20);
+            this._pushbulletDeviceIdTextBox.TabIndex = 9;
+            // 
+            // _pushbulletDeviceIdlabel
+            // 
+            this._pushbulletDeviceIdlabel.AutoSize = true;
+            this._pushbulletDeviceIdlabel.Location = new System.Drawing.Point(6, 72);
+            this._pushbulletDeviceIdlabel.Name = "_pushbulletDeviceIdlabel";
+            this._pushbulletDeviceIdlabel.Size = new System.Drawing.Size(53, 13);
+            this._pushbulletDeviceIdlabel.TabIndex = 8;
+            this._pushbulletDeviceIdlabel.Text = "Device Id";
+            // 
+            // _pushbulletTokenTextBox
+            // 
+            this._pushbulletTokenTextBox.Location = new System.Drawing.Point(110, 43);
+            this._pushbulletTokenTextBox.Name = "_pushbulletTokenTextBox";
+            this._pushbulletTokenTextBox.Size = new System.Drawing.Size(390, 20);
+            this._pushbulletTokenTextBox.TabIndex = 7;
+            // 
+            // _pushbulletTokenLabel
+            // 
+            this._pushbulletTokenLabel.AutoSize = true;
+            this._pushbulletTokenLabel.Location = new System.Drawing.Point(6, 43);
+            this._pushbulletTokenLabel.Name = "_pushbulletTokenLabel";
+            this._pushbulletTokenLabel.Size = new System.Drawing.Size(76, 13);
+            this._pushbulletTokenLabel.TabIndex = 6;
+            this._pushbulletTokenLabel.Text = "Access Token";
+            // 
+            // _pushbulletCheckbox
+            // 
+            this._pushbulletCheckbox.AutoSize = true;
+            this._pushbulletCheckbox.Location = new System.Drawing.Point(5, 19);
+            this._pushbulletCheckbox.Name = "_pushbulletCheckbox";
+            this._pushbulletCheckbox.Size = new System.Drawing.Size(172, 17);
+            this._pushbulletCheckbox.TabIndex = 5;
+            this._pushbulletCheckbox.Text = "Enable Pushbullet Notifications";
+            this._pushbulletCheckbox.UseVisualStyleBackColor = true;
+            this._pushbulletCheckbox.CheckedChanged += new System.EventHandler(this._pushbulletCheckbox_CheckedChanged);
             // 
             // _settingsTableLayout
             // 
@@ -459,6 +506,17 @@ namespace DFAssist
             this._tokenLabel.TabIndex = 1;
             this._tokenLabel.Text = "Token";
             // 
+            // _telegramCheckBox
+            // 
+            this._telegramCheckBox.AutoSize = true;
+            this._telegramCheckBox.Location = new System.Drawing.Point(6, 20);
+            this._telegramCheckBox.Name = "_telegramCheckBox";
+            this._telegramCheckBox.Size = new System.Drawing.Size(167, 17);
+            this._telegramCheckBox.TabIndex = 0;
+            this._telegramCheckBox.Text = "Enable Telegram Notifications";
+            this._telegramCheckBox.UseVisualStyleBackColor = true;
+            this._telegramCheckBox.CheckedChanged += new System.EventHandler(this._telegramCheckBox_CheckedChanged);
+            // 
             // _generalSettings
             // 
             this._generalSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -472,6 +530,18 @@ namespace DFAssist
             this._generalSettings.TabIndex = 0;
             this._generalSettings.TabStop = false;
             this._generalSettings.Text = "General Settings";
+            // 
+            // _testSettings
+            // 
+            this._testSettings.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._testSettings.Controls.Add(this._enableTestEnvironment);
+            this._testSettings.Location = new System.Drawing.Point(481, 0);
+            this._testSettings.Name = "_testSettings";
+            this._testSettings.Size = new System.Drawing.Size(457, 100);
+            this._testSettings.TabIndex = 3;
+            this._testSettings.TabStop = false;
+            this._testSettings.Text = "Test Settings";
             // 
             // _toastSettings
             // 
@@ -499,72 +569,6 @@ namespace DFAssist
             this._ttsSettings.TabStop = false;
             this._ttsSettings.Text = "Text To Speech Settings";
             // 
-            // _telegramCheckBox
-            // 
-            this._telegramCheckBox.AutoSize = true;
-            this._telegramCheckBox.Location = new System.Drawing.Point(6, 20);
-            this._telegramCheckBox.Name = "_telegramCheckBox";
-            this._telegramCheckBox.Size = new System.Drawing.Size(167, 17);
-            this._telegramCheckBox.TabIndex = 0;
-            this._telegramCheckBox.Text = "Enable Telegram Notifications";
-            this._telegramCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // _pushbulletSettings
-            // 
-            this._pushbulletSettings.Controls.Add(this._pushbulletDeviceIdTextBox);
-            this._pushbulletSettings.Controls.Add(this._pushbulletDeviceIdlabel);
-            this._pushbulletSettings.Controls.Add(this._pushbulletTokenTextBox);
-            this._pushbulletSettings.Controls.Add(this._pushbulletTokenLabel);
-            this._pushbulletSettings.Controls.Add(this._pushbulletCheckbox);
-            this._pushbulletSettings.Location = new System.Drawing.Point(4, 431);
-            this._pushbulletSettings.Name = "_pushbulletSettings";
-            this._pushbulletSettings.Size = new System.Drawing.Size(933, 100);
-            this._pushbulletSettings.TabIndex = 1;
-            this._pushbulletSettings.TabStop = false;
-            this._pushbulletSettings.Text = "Pushbullet Settings";
-            // 
-            // _pushbulletDeviceIdTextBox
-            // 
-            this._pushbulletDeviceIdTextBox.Location = new System.Drawing.Point(110, 72);
-            this._pushbulletDeviceIdTextBox.Name = "_pushbulletDeviceIdTextBox";
-            this._pushbulletDeviceIdTextBox.Size = new System.Drawing.Size(390, 20);
-            this._pushbulletDeviceIdTextBox.TabIndex = 9;
-            // 
-            // _pushbulletDeviceIdlabel
-            // 
-            this._pushbulletDeviceIdlabel.AutoSize = true;
-            this._pushbulletDeviceIdlabel.Location = new System.Drawing.Point(6, 72);
-            this._pushbulletDeviceIdlabel.Name = "_pushbulletDeviceIdlabel";
-            this._pushbulletDeviceIdlabel.Size = new System.Drawing.Size(53, 13);
-            this._pushbulletDeviceIdlabel.TabIndex = 8;
-            this._pushbulletDeviceIdlabel.Text = "Device Id";
-            // 
-            // _pushbulletTokenTextBox
-            // 
-            this._pushbulletTokenTextBox.Location = new System.Drawing.Point(110, 43);
-            this._pushbulletTokenTextBox.Name = "_pushbulletTokenTextBox";
-            this._pushbulletTokenTextBox.Size = new System.Drawing.Size(390, 20);
-            this._pushbulletTokenTextBox.TabIndex = 7;
-            // 
-            // _pushbulletTokenLabel
-            // 
-            this._pushbulletTokenLabel.AutoSize = true;
-            this._pushbulletTokenLabel.Location = new System.Drawing.Point(6, 43);
-            this._pushbulletTokenLabel.Name = "_pushbulletTokenLabel";
-            this._pushbulletTokenLabel.Size = new System.Drawing.Size(76, 13);
-            this._pushbulletTokenLabel.TabIndex = 6;
-            this._pushbulletTokenLabel.Text = "Access Token";
-            // 
-            // _pushbulletCheckbox
-            // 
-            this._pushbulletCheckbox.AutoSize = true;
-            this._pushbulletCheckbox.Location = new System.Drawing.Point(5, 19);
-            this._pushbulletCheckbox.Name = "_pushbulletCheckbox";
-            this._pushbulletCheckbox.Size = new System.Drawing.Size(172, 17);
-            this._pushbulletCheckbox.TabIndex = 5;
-            this._pushbulletCheckbox.Text = "Enable Pushbullet Notifications";
-            this._pushbulletCheckbox.UseVisualStyleBackColor = true;
-            // 
             // MainControl
             // 
             this.Controls.Add(this._appTabControl);
@@ -577,19 +581,19 @@ namespace DFAssist
             this._settingsPage.ResumeLayout(false);
             this._settingsPanel.ResumeLayout(false);
             this._settingsPanel.PerformLayout();
-            this._testSettings.ResumeLayout(false);
-            this._testSettings.PerformLayout();
+            this._pushbulletSettings.ResumeLayout(false);
+            this._pushbulletSettings.PerformLayout();
             this._settingsTableLayout.ResumeLayout(false);
             this._telegramSettings.ResumeLayout(false);
             this._telegramSettings.PerformLayout();
             this._generalSettings.ResumeLayout(false);
             this._generalSettings.PerformLayout();
+            this._testSettings.ResumeLayout(false);
+            this._testSettings.PerformLayout();
             this._toastSettings.ResumeLayout(false);
             this._toastSettings.PerformLayout();
             this._ttsSettings.ResumeLayout(false);
             this._ttsSettings.PerformLayout();
-            this._pushbulletSettings.ResumeLayout(false);
-            this._pushbulletSettings.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -787,11 +791,7 @@ namespace DFAssist
                 _timer.Tick += Timer_Tick;
             }
 
-            _timer.Enabled = true;
-
-            // shows a test toast
-            ToastWindowNotification(Localization.GetText("ui-toast-notification-test-title"), Localization.GetText("ui-toast-notification-test-message"));
-
+            _timer.Enabled = true;            
             _pluginInitializing = false;
 
             ActGlobals.oFormActMain.UpdateCheckClicked += FormActMain_UpdateCheckClicked;
@@ -926,10 +926,15 @@ namespace DFAssist
             _toastSettings.Text = Localization.GetText("ui-toast-settings-group");
             _ttsSettings.Text = Localization.GetText("ui-tts-settings-group");
             _testSettings.Text = Localization.GetText("ui-test-settings-group");
+            _telegramSettings.Text = Localization.GetText("ui-telegram-settings-group");
             _telegramCheckBox.Text = Localization.GetText("ui-telegram-display-text");
             _tokenLabel.Text = Localization.GetText("ui-telegram-token-display-text");
             _ChatIdLabel.Text = Localization.GetText("ui-telegram-chatid-display-text");
             _telegramSettings.Text = Localization.GetText("ui-telegram-settings-group");
+            _pushbulletSettings.Text = Localization.GetText("ui-pushbullet-settings-group");
+            _pushbulletCheckbox.Text = Localization.GetText("ui-pushbullet-display-text");
+            _pushbulletDeviceIdlabel.Text = Localization.GetText("ui-pushbullet-deviceid-display-text");
+            _pushbulletTokenLabel.Text = Localization.GetText("ui-pushbullet-token-display-text");
 
             Logger.Debug("Localization for UI Updated!");
         }
@@ -990,6 +995,7 @@ namespace DFAssist
             catch (Exception ex)
             {
                 Logger.Exception(ex, "Unable to push Pushbullet notification.");
+                Logger.Debug(ex.ToString());
             }
         }
 
@@ -1034,6 +1040,7 @@ namespace DFAssist
             catch(Exception ex)
             {
                 Logger.Exception(ex, "Unable to send Telegram notification.");
+                Logger.Debug(ex.ToString());
             }
         }
 
@@ -1141,8 +1148,7 @@ namespace DFAssist
 
         private void EnableTtsOnCheckedChanged(object sender, EventArgs eventArgs)
         {
-            Logger.Debug($"[TTS] Desired Value: {_ttsCheckBox.Checked}!");
-            TtsNotification(Localization.GetText("ui-tts-notification-test-message"), Localization.GetText("ui-tts-notification-test-title"));
+            
         }
 
         private void TtsNotification(string message, string title = "ui-tts-dutyfound")
@@ -1293,5 +1299,37 @@ namespace DFAssist
         }
 
         #endregion
+
+        private void _ttsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            Logger.Debug($"[TTS] Desired Value: {_ttsCheckBox.Checked}!");
+
+            if(_ttsCheckBox.Checked)
+                TtsNotification(Localization.GetText("ui-tts-notification-test-message"), Localization.GetText("ui-tts-notification-test-title"));
+        }
+
+        private void _telegramCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            Logger.Debug($"[Telegram] Desired Value: {_telegramCheckBox.Checked}!");
+
+            if (_telegramCheckBox.Checked)
+                SendTelegramNotification(Localization.GetText("ui-toast-notification-test-title"), Localization.GetText("ui-telegram-notification-test-message"));
+        }
+
+        private void _pushbulletCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            Logger.Debug($"[Pushbullet] Desired Value: {_pushbulletCheckbox.Checked}!");
+
+            if (_pushbulletCheckbox.Checked)
+                SendPushbulletNotification(Localization.GetText("ui-toast-notification-test-title"), Localization.GetText("ui-pushbullet-notification-test-message"));
+        }
+
+        private void _disableToasts_CheckedChanged(object sender, EventArgs e)
+        {
+            Logger.Debug($"[Toasts] Desired Value: {!_ttsCheckBox.Checked}!");
+
+            if (!_disableToasts.Checked)
+                ToastWindowNotification(Localization.GetText("ui-toast-notification-test-title"), Localization.GetText("ui-toast-notification-test-message"));
+        }
     }
 }
