@@ -56,7 +56,9 @@
   "l-queue-entered": "Q: インスタンスエリアに入りました",
   "l-queue-matched": "Q: 突入準備完了 [{0}] - {1}",
   "l-queue-updated": "Q: 申請状態が更新されました [{0}, {1}]",
+  "l-queue-order-updated": "Q: Matching State Updated [{0}, #{1} in queue for your role]",
   "l-queue-order": "#{0} in queue for your role",
+
 
   "l-fate-occured-info": "F: {0} FATE発生!",
 

@@ -13,6 +13,8 @@
         // Matching state
         MATCH_PROGRESS, // [0] = instance code, [1] = status, [2] = tank, [3] = healer, [4] = dps
 
+        MATCH_ORDER_PROGRESS, // [0] = roulette code, [1] = role order
+
         // Matched
         MATCH_ALERT,    // [0] = roulette code, [1] = instance code
 

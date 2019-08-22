@@ -238,6 +238,7 @@ namespace DFAssist
                     byte healer;
                     var member = 0;
                     var instance = Data.GetInstance(code);
+                    var roulette = Data.GetRoulette(code);
                     var order = data[4];
 
                     if (_netCompatibility)
@@ -295,8 +296,16 @@ namespace DFAssist
                         // Duty Accepted status
                     }
 
-                    var memberinfo = $"Tank: {tank}/{instance.Tank}, Healer: {healer}/{instance.Healer}, DPS: {dps}/{instance.Dps}, Member: {member}, Order: {order}";
-                    Logger.Info("l-queue-updated", instance.Name, memberinfo);
+                    if (order == 0)
+                    {
+                        var memberinfo = $"Tank: {tank}/{instance.Tank}, Healer: {healer}/{instance.Healer}, DPS: {dps}/{instance.Dps}, Member: {member}";
+                        Logger.Info("l-queue-updated", instance.Name, memberinfo);
+                    }
+                    else
+                    {
+                        FireEvent(pid, EventType.MATCH_ORDER_PROGRESS, new int[] { code, order });
+                        Logger.Info("l-queue-order-updated", roulette.Name, order);
+                    }
                 }
                 else if (opcode == 0x0080)
                 {

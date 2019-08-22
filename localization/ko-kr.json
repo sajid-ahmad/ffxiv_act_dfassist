@@ -56,7 +56,9 @@
   "l-queue-entered": "Q: 임무 입장함",
   "l-queue-matched": "Q: 매칭됨 [{0}] - {1}",
   "l-queue-updated": "Q: 매칭 상태 업데이트됨 [{0}, {1}]",
+  "l-queue-order-updated": "Q: Matching State Updated [{0}, #{1} in queue for your role]",
   "l-queue-order": "#{0} in queue for your role",
+
 
   "l-fate-occured-info": "F: {0} 돌발 발생!",
 

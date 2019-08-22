@@ -56,7 +56,9 @@
   "l-queue-entered": "Q: Entrée dans la zone instanciée",
   "l-queue-matched": "Q: Attente terminée [{0}] - {1}",
   "l-queue-updated": "Q: Mise à jour de la file d'attente [{0}, {1}]",
+  "l-queue-order-updated": "Q: Matching State Updated [{0}, #{1} in queue for your role]",
   "l-queue-order": "#{0} in queue for your role",
+
 
   "l-fate-occured-info": "F: {0} ALEA en cours!",
 

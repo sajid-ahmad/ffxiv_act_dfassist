@@ -954,15 +954,25 @@ namespace DFAssist
                 return;
 
             var head = _networks.Count <= 1 ? "" : "[" + server + "] ";
-            switch(eventType)
+            var title = head + (args[0] != 0 ? GetRouletteName(args[0]) : Localization.GetText("app-name"));
+            var testing = _enableTestEnvironment.Checked ? "[Code: " + args[1] + "] " : string.Empty;
+
+            switch (eventType)
             {
-                case EventType.MATCH_ALERT:
-                    var title = head + (args[0] != 0 ? GetRouletteName(args[0]) : Localization.GetText("app-name"));
-                    var testing = _enableTestEnvironment.Checked ? "[Code: " + args[1] + "] " : string.Empty;
+                case EventType.MATCH_ALERT:                    
                     SendPushbulletNotification(title, ">> " + GetInstanceName(args[1]));
                     SendTelegramNotification(title, ">> " + GetInstanceName(args[1]));
                     ToastWindowNotification(title, ">> " + testing + GetInstanceName(args[1]));
                     TtsNotification(GetInstanceName(args[1]));
+                    break;
+                case EventType.MATCH_ORDER_PROGRESS:
+                    var order = args[1];
+
+                    if (order == 1)
+                    {
+                        var message = ">> " + string.Format(Localization.GetText("l-queue-order"), order);
+                        SendTelegramNotification(title, message, true);                        
+                    }
                     break;
             }
         }
@@ -999,7 +1009,7 @@ namespace DFAssist
             }
         }
 
-        private void SendTelegramNotification(string title, string messageText)
+        private void SendTelegramNotification(string title, string messageText, bool disableNotification = false)
         {
             Logger.Debug("Request received to send Telegram notification");
             if(!_telegramCheckBox.Checked)
@@ -1034,7 +1044,7 @@ namespace DFAssist
                 else
                     chatId = new Telegram.Bot.Types.ChatId(_chatIdTextBox.Text);
 
-                var message = botClient.SendTextMessageAsync(chatId, title + " " + messageText).Result;
+                var message = botClient.SendTextMessageAsync(chatId, title + " " + messageText, disableNotification: disableNotification).Result;
                 Logger.Debug($"Telegram notification sent with message Id {message.MessageId}");
             }
             catch(Exception ex)
